@@ -8,7 +8,7 @@ import { Document } from '../model/document.model';
 })
 export class UploadService {
 
-   baseUrl = 'http://localhost:8080/';
+   baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 

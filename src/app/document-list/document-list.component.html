@@ -1,19 +1,24 @@
 
-    <div class="col-md-6">
-      <h4>Document List</h4>
-      <ul class="list-group">
-        <li
-          class="list-group-item"
+    <div class="col-md-6" class="document-list-container">
+      <h2>Document List</h2>
+      <div class="document-list-items"
+        
+          
           *ngFor="let document of documents; let i = index"
           [class.active]="i == currentIndex"
           (click)="setActiveDocument(document, i)"
         >
-          {{ document.name }}
-        </li>
-      </ul>
-  
-    </div>
-    <div class="col-md-6">
+        {{ document.name }} 
+        <div  class="material-symbols-outlined">
+          delete
+        </div>
+       
+        </div>
+      
+        
+          </div>
+
+    <!-- <div class="col-md-6">
       <div *ngIf="currentDocument">
         <h4>Document</h4>
         <div>
@@ -24,4 +29,4 @@
         <br />
         <p>Please click on a Document...</p>
       </div>
-    </div>
+    </div> -->
