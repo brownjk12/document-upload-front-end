@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Document } from '../model/document.model';
 import { UploadService } from '../services/upload.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-document-list',
@@ -9,13 +10,13 @@ import { UploadService } from '../services/upload.service';
 })
 export class DocumentListComponent {
 
-  documents: Document[];
+  documents: Document[] = [];
   currentDocument: Document;
   name = "";
   currentIndex = -1;
     
 
-  constructor(private uploadService: UploadService) {
+  constructor(private uploadService: UploadService,private router: Router) {
   }
 
   ngOnInit (): void {
@@ -42,5 +43,17 @@ export class DocumentListComponent {
   setActiveDocument(document : Document, index : number): void {
     this.currentDocument = document;
     this.currentIndex = index;
+  }
+
+  deleteDocument (id:number) {
+    this.uploadService.delete(id)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['/documents']);
+      },
+      error => {
+        console.log(error);
+      });
   }
 }

@@ -22,11 +22,17 @@ width: 90vw;
 
 .nav-bar{
     background-color: rgb(105,123,115);
-    padding-top: 5%;
-    display: flex;
-    justify-content: flex-end;
+    padding-top: 2%;
+    
 }
 .nav-elements{
-    display: flex;
-  
+    display: inline-flex;
+    padding: 5px;
+    align-items: end;
+  margin-left: 75%;
+  margin-right: -70%;
+}
+
+a{
+    color: rgb(238,224,201);
 }

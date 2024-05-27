@@ -9,7 +9,7 @@
           (click)="setActiveDocument(document, i)"
         >
         {{ document.name }} 
-        <div  class="material-symbols-outlined">
+        <div  class="material-symbols-outlined" (click)="deleteDocument(document.id)">
           delete
         </div>
        
