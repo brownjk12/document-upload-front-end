@@ -56,4 +56,16 @@ export class DocumentListComponent {
         console.log(error);
       });
   }
+
+  updateDocument(document:Document, id:number){
+    this.uploadService.update(document,id)
+    .subscribe(
+      response => {
+        console.log(response);
+        this.router.navigate(['/documents']);
+      },
+      error => {
+        console.log(error);
+      });
+  }
 }

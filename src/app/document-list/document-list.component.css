@@ -32,3 +32,16 @@ h2{
     background-color: rgb(198,97,85);
     border-radius: 100%;
 }
+
+#material-symbols-pencil{
+    display: flex;
+  
+    color: rgb( 1,77,78);
+    margin-left: 5%;
+
+    
+}
+#material-symbols-pencil:hover{
+    background-color: rgb(2,182,185);
+    border-radius: 100%;
+}

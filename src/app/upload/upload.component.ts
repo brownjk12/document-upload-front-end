@@ -12,6 +12,7 @@ export class UploadComponent implements OnInit {
 constructor(private uploadService: UploadService) { }
 document : Document = new Document();
   upload = false;
+  file: File | null = null
 
   ngOnInit(){
   }
