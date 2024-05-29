@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class UploadService {
 
-   baseUrl = 'http://localhost:8080';
+   baseUrl = 'http://localhost:8080/documents';
 
   constructor(private http: HttpClient) { }
 
@@ -26,7 +26,7 @@ export class UploadService {
   }
 
   getDocumentList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/documents`);
+    return this.http.get(`${this.baseUrl}`);
   }
 
   get(id: any): Observable<any> {
