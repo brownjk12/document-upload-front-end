@@ -1,11 +1,37 @@
-
 <div class="everything">
-  <input type="file" (change)="newDocument()" class=file id="button-56" hidden>
-  <label for="button-56">Choose File</label>
-  
-  <button click="saveDocument()" class="button-56">
-    Save
+
+<mat-form-field class="select-file-field">
+  <div>
+    <mat-toolbar>
+    <input matInput [value]="fileName"/>
+  <button [disabled]="!currentFile" click="upload()" class="button-12" >
+    Upload
   </button>
+</mat-toolbar>
+  <input type="file" name="fileInput"  id="fileInput" (change)="selectFile($event)"/>
+
+</div>
+</mat-form-field>
+
+
+@if (message) {
+  <div class="message">
+    {{ message }}
+  </div>
+  }
+
+  <mat-card class="card">
+    <mat-card-header>Documents</mat-card-header>
+    <mat-card-content>
+      <mat-list role="list">
+        @for (file of documents | async; track file.name ) {
+        <mat-list-item role="listitem">
+          <a href="{{ file.url }}">{{ file.name }}</a>
+        </mat-list-item>
+        }
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>
 
 

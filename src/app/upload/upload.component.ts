@@ -1,52 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { UploadService } from '../services/upload.service';
-import { Document } from '../model/document.model';
-
+import { HttpResponse, HttpEventType } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-upload',
   templateUrl: './upload.component.html',
-  styleUrls: ['./upload.component.css']
+  styleUrls: ['./upload.component.css'],
 })
 export class UploadComponent implements OnInit {
+  currentFile?: File;
+  message = '';
+  documents?: Observable<any>;
+  fileName = 'Select File';
 
-constructor(private uploadService: UploadService) { }
-document : Document = new Document();
-  upload = false;
-  file: File | null = null
+  constructor(private uploadService: UploadService) {}
 
-  ngOnInit(){
+  ngOnInit(): void {
+    this.documents = this.uploadService.getFiles();
+   
   }
 
-  saveDocument(): void{
-const data ={
-  name : this.document.name,
-  category: this.document.category,
-  id : this.document.id
-};
-  
-this.uploadService.create(data)
-.subscribe(
-  response => {
-    console.log(response);
-    this.upload = true;
-  },
-  error => {
-    console.log(error)
-  });
-}
- 
- newDocument(): void {
-  this.upload = false;
-  this.document = {
-    name: "",
-    category: "",
-    id: 0,
-    fileLocation: ""
-  };
-}
-}
+  selectFile(event: any): void {
+    
+    this.message = '';
+    if (event.target.files && event.target.files[0]) {
+      const file: File = event.target.files[0];
+      this.currentFile = file;
+      this.fileName = this.currentFile.name;
+    } else {
+      this.fileName = 'Select File';
+      
+    }
+  }
+  upload(): void {
+    console.log("HERE WE ARE")
+    if (this.currentFile) {
+      this.uploadService.upload(this.currentFile).subscribe({
+        next: (event: any) => {
+          if (event instanceof HttpResponse) {
+            this.message = event.body.message;
+            this.documents = this.uploadService.getFiles();
+          
+          }
+         
+        },
+        error: (err: any) => {
+          console.log(err);
 
- 
-  
-
-  
+          if (err.error && err.error.message) {
+            this.message = err.error.message;
+          } else {
+            this.message = 'Could not upload the file!';
+          }
+        },
+        complete: () => {
+          this.currentFile = undefined;
+        },
+      });
+    }
+  }
+}

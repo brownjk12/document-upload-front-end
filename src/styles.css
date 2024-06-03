@@ -1,10 +1,8 @@
 html{
-    background-color: rgb(148, 173,162);
-
-    color:rgb( 238,224,201);
-    font-family: "Poetsen One", sans-serif;
-
-    
+    color: #755c57;
+    font-family: "Poetsen One", sans-serif; 
+    background:url(../src/assets/BlueBoho.jpg); 
+    height: 100%;
 }
 
 .poetsen-one-regular {
@@ -12,3 +10,5 @@ html{
     font-weight: 400;
     font-style: normal;
   }
+
+

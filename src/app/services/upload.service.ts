@@ -8,16 +8,16 @@ import { Observable } from 'rxjs';
 })
 export class UploadService {
 
-   baseUrl = 'http://localhost:8080/documents';
+ private  baseUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) { }
 
   upload(file: File): Observable<HttpEvent<any>> {
     const formData: FormData = new FormData();
-
+   
     formData.append('file', file);
 
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
+    const req = new HttpRequest('POST', `${this.baseUrl}/document/upload`, formData, {
       reportProgress: true,
       responseType: 'json'
     });
@@ -25,23 +25,18 @@ export class UploadService {
     return this.http.request(req);
   }
 
-  getDocumentList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+  getFiles(): Observable<any> {
+    return this.http.get(`${this.baseUrl}document/documents`);
   }
 
-  get(id: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
-  }
 
-  create(document :any ): Observable<any> {
-    return this.http.post(this.baseUrl, document);
-  }
+  // update(id: any, document: any): Observable<any> {
+  //   return this.http.put(`${this.baseUrl}/${id}`, document);
+  // }
 
-  update(id: any, document: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, document);
-  }
-
-  delete(id: any): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
-  }
+  delete(name: String): Observable<any> {
+   
+   
+    return this.http.delete(`${this.baseUrl}/${name}`);
+   }
 }
